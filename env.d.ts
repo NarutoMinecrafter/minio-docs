@@ -8,7 +8,8 @@ export interface Env {
   // S3
   S3_ACCESS_KEY: string
   S3_SECRET_KEY: string
-  S3_END_POINT: string
+  S3_ENDPOINT?: string
+  S3_REGION: string
   S3_BUCKET: string
 
   // DB
