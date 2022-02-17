@@ -1,4 +1,4 @@
-import { Resolver, Args, Mutation, Context } from '@nestjs/graphql'
+import { Resolver, Args, Mutation, Context, Query } from '@nestjs/graphql'
 import { ExpressContext } from 'apollo-server-express'
 import { GraphQLUpload, FileUpload } from 'graphql-upload'
 import { FileService } from './file.service'
@@ -24,7 +24,7 @@ export class FileResolver {
     return await this.fileService.addAccess(fileId, accessIDs)
   }
 
-  @Mutation(() => GraphQLUpload)
+  @Query(() => GraphQLUpload)
   async download(
     @Context() context: ExpressContext,
     @Args({ name: 'userId', type: () => String }) userId: string,
@@ -43,12 +43,12 @@ export class FileResolver {
     return await this.fileService.delete(userId, filename, Bucket)
   }
 
-  @Mutation(() => [FileEntity])
+  @Query(() => [FileEntity])
   async list(@Args({ name: 'userId', type: () => String }) userId: string) {
     return await this.fileService.list(userId)
   }
 
-  @Mutation(() => FileEntity)
+  @Query(() => FileEntity)
   async file(@Args({ name: 'fileId', type: () => String }) fileId: string) {
     return await this.fileService.file(fileId)
   }
